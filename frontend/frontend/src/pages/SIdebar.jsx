@@ -1,7 +1,7 @@
 import { useState , useEffect}  from 'react'
 import axios from 'axios'
 
-const Sidebar = () => {
+const Sidebar = ({task , setTask}) => {
   const [todo , setTodo] = useState([])
   const [value , setValue] = useState('')
 //   const fetchData = async () => {
@@ -9,18 +9,24 @@ const Sidebar = () => {
 //   return response.data
 
 // }
+// console.log(task)
 const assignValue = async() => {
   const newObject = { task : value , completed : false}
   const response = await axios.post('http://localhost:5000/api',newObject)
   console.log(response)
   setTodo(item => [...item , response.data])
+  
+}
+const content = (item) => {
+  setTask(item)
+
 }
 const todoList = [{name : "Wash The Plates" , checked : true},{name : "Bag Some Hoes" , checked : false}]
 useEffect(() => {
   const fetchData = async () => {
     const response = await axios.get('http://localhost:5000/api')
     setTodo(response.data)
-    console.log(response.data)
+    // console.log(response.data)
   }
   fetchData()
 }
@@ -35,7 +41,7 @@ useEffect(() => {
       <ul className="border border-red-500 p-2 h-[90%]">
         {
           todo.map((item , index) => (
-            <li className='border flex h-10 m-2 justify-between items-center p-2' key = {index}>
+            <li className='border flex h-10 m-2 justify-between items-center p-2' key = {index} onClick = {() => content(item)}>
             <div className="">{item.task}</div>
           <input type="checkbox" name="" id="" className='' />
             </li>
