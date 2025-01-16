@@ -1,6 +1,8 @@
 import React from 'react'
 
 const Calender = () => {
+    const today = new Date()
+    // console.log(today.toDateString())
     const Months = new Date().getMonth()
     const todaysDate = new Date().getDate()
     function getDaysInMonth(year, month) {
@@ -40,14 +42,16 @@ const Calender = () => {
 
     const calender = selectMonth(Months)
 
-    console.log(calender);
+    // console.log(calender);
     // Output: Array of Date objects for each day in January 2025
     
   return (
     <div className="border-solid border-green-600 w-1/4 flex flex-col h-full">
-        <div className="border border-red-500 h-1/2 flex flex-col">
-            <div className="border border-green-400 h-1/5"></div>
-            <div className="border border-blue-400 h-3/5 flex flex-wrap"><ul className='border w-full flex flex-wrap'>{calender.map((days , index) => days !== todaysDate ? <li className="text-red-500">{days}</li>:<li className="border border-red-500">{days}</li> )}</ul></div>
+        <div className="h-2/4 flex flex-col">
+            {/* <div className="border border-green-400 h-1/5"></div> */}
+            <div className="h-4/5 flex flex-wrap shadow-md"><ul className=' w-full flex flex-wrap justify-between p-1'>{calender.map((days , index) => days !== todaysDate ? <li key={index} className="w-10 flex justify-center items-center">{days}</li>:<li  key={index} className="bg-[#001d3d] border-none text-white rounded-full w-8 flex justify-center items-center">{days}</li> )}</ul>
+            <div className="w-full flex justify-center items-center text-[#001d3d] font-serif">{today.toDateString()}</div>
+            </div>
         </div>
     </div>
   )
