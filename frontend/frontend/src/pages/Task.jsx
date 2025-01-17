@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Task = () => {
+const Task = ({task , setTask}) => {
   return (
-    <div className="border border-black w-3/4"></div>
+    <div className="border border-black w-3/4">{task.task}</div>
   )
 }
 
